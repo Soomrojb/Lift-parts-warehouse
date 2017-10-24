@@ -24,7 +24,7 @@ class LiftpartSpider(scrapy.Spider):
     
     def firstpage(self, response):
         Soup = BeautifulSoup(response.body, "lxml")
-        RwMaxRecs = response.css(".results_per_page_select option::text")[-1].extract()
+        RwMaxRecs = response.css(".results_per_page_select option::attr(value)")[-1].extract()
         MaxRecords = re.findall(r"^(\d+)", RwMaxRecs)[0]
         Newparams = "?searching=Y&sort=13&page=1&show=" + MaxRecords
         CustomURL = response.url + Newparams
